@@ -1,0 +1,5 @@
+*.key.json
+node_modules
+.env
+bin
+developer_key
