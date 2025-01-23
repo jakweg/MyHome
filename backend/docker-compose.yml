@@ -2,7 +2,6 @@ version: '3'
 
 services:
   server:
-    container_name: iot-backend
     env_file:
       - .env
     environment:
