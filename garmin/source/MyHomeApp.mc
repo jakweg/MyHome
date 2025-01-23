@@ -29,9 +29,8 @@ class PageLoopFactory extends WatchUi.ViewLoopFactory {
 
 
         var view = new UnsupportedDevicePageView(device);
-        return [ view, new WatchUi.BehaviorDelegate() ];
+        return [ view, new GenericInputDelegate() ];
     }
-
 }
 
 class MyHomeApp extends Application.AppBase {
@@ -57,8 +56,23 @@ class MyHomeApp extends Application.AppBase {
             return [delegate.getView(), delegate];
         }
 
+        var hiddenIds = Toybox.Application.Storage.getValue("hidden-ids");
+        if (hiddenIds == null) {
+            hiddenIds = [];
+        }
 
-        var loop = new WatchUi.ViewLoop(new PageLoopFactory(devices),
+        var filteredDevices = [];
+        for (var i = 0; i < devices.size(); ++i) {
+            var device = devices[i] as Dictionary<String, String>;
+            if (hiddenIds.indexOf(device["id"]) == -1) {
+                filteredDevices.add(device);
+            }
+        }
+        if (filteredDevices.size() == 0) {
+            filteredDevices = devices;
+        }
+
+        var loop = new WatchUi.ViewLoop(new PageLoopFactory(filteredDevices),
         {:wrap => true});
 
         return [loop, new WatchUi.ViewLoopDelegate(loop)];
