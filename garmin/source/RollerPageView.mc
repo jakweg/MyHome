@@ -55,7 +55,7 @@ class MyActionMenuDelegate extends WatchUi.ActionMenuDelegate {
 }
 
 
-class RollerPageViewDelegate extends WatchUi.BehaviorDelegate {
+class RollerPageViewDelegate extends GenericInputDelegate {
     hidden var mView;
 
     function initialize(view) {
