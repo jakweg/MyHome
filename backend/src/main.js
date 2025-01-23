@@ -20,8 +20,9 @@ function wrapWithHandler(next) {
             await next(...args)
         } catch (e) {
             console.error(e)
-            const [,res] = args
-            res.end();
+            const [, res] = args
+            res.writeHead(400)
+            res.end()
         }
     }
 }
@@ -45,8 +46,11 @@ app.get('/device/:deviceId/status', wrapWithHandler(async (req, res) => {
     ))
 }))
 
-app.post('/device/:deviceId/command/:code/:action', wrapWithHandler(async (req, res) => {
-    await sendCommandToDevice(req.params.deviceId, req.params.code, req.params.action)
+app.post('/device/:deviceId/command', wrapWithHandler(async (req, res) => {
+    const code = req.body.code
+    const value = req.body.value
+
+    await sendCommandToDevice(req.params.deviceId, code, value)
 
     res.end(JSON.stringify({ok: "yes"}))
 }))
