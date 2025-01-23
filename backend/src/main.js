@@ -11,7 +11,7 @@ const app = express()
 app.use(express.json());
 app.use((req, res, next) => {
     const token = req.header('authorization')?.split?.(' ')?.[1]
-    if (token !== process.env.TOKEN || !process.env.TOKEN) return res.sendStatus(401)
+    if (token !== process.env.API_AUTH_TOKEN || !process.env.API_AUTH_TOKEN) return res.sendStatus(401)
     next()
 })
 function wrapWithHandler(next) {
