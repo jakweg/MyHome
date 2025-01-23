@@ -86,7 +86,7 @@ function parseCategory(category) {
     switch (category) {
         case 'tdq':
             return 'switch'
-        case 'dq':
+        case 'dj':
             return 'light-switch'
         case 'clkg':
             return 'curtain'
@@ -113,6 +113,12 @@ function parseDeviceStatus(status) {
     if (switch1 != null) {
         return switch1
     }
+  
+  const switchLed = status.find(e => e.code === 'switch_led')?.value
+  if (switchLed != null) {
+    return switchLed;
+  }
+  
   return {unknown: 'failed to parse device status', raw: status}
 }
 

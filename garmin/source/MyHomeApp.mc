@@ -16,18 +16,24 @@ class PageLoopFactory extends WatchUi.ViewLoopFactory {
 
     function getView(page as Lang.Number) as [ WatchUi.View ] or [ WatchUi.View, WatchUi.BehaviorDelegate ] {
         var device = mDevicesList[page];
+        var category = device["category"];
         
-        if (device["category"].equals("curtain")) {
+        if (category.equals("curtain")) {
             var view = new RollerPageView(device);
             return [ view, new RollerPageViewDelegate(view.weak()) ];
         } 
 
-        if (device["category"].equals("triple-switch")) {
+        if (category.equals("triple-switch")) {
             var view = new TripleSwitchPageView(device);
             return [ view, new TripleSwitchPageViewDelegate(view.weak()) ];
         }
 
-        if (device["category"].equals("light-switch") || device["category"].equals("switch")) {
+        if (category.equals("light-switch")) {
+            var view = new LightPageView(device);
+            return [ view, new LightPageViewDelegate(view.weak()) ];
+        }
+
+        if (category.equals("switch")) {
             var view = new SingleSwitchPageView(device);
             return [ view, new SingleSwitchPageViewDelegate(view.weak()) ];
         }
