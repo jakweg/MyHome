@@ -3,3 +3,4 @@ node_modules
 .env
 bin
 developer_key
+.DS_Store

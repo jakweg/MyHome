@@ -144,9 +144,9 @@ export async function getDeviceStatus(deviceId){
 
 }
 
-export async function sendCommandToDevice(deviceId, code, action) {
+export async function sendCommandToDevice(deviceId, code, value) {
     await getToken()
-    const body = { commands: [{code: code, value: action}]}
+    const body = { commands: [{code, value}]}
 const query = {};
   const method = "POST";
   const url = `/v1.0/devices/${deviceId}/commands`;
