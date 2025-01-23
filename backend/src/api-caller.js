@@ -86,6 +86,8 @@ function parseCategory(category) {
     switch (category) {
         case 'tdq':
             return 'switch'
+        case 'dq':
+            return 'light-switch'
         case 'clkg':
             return 'curtain'
         case 'kg':
