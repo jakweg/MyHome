@@ -1,0 +1,15 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+
+    <bitmap id="positiveToastIcon"
+        personality="
+        system_icon_positive__check
+        system_size__toast_icon
+    " />
+
+    <bitmap id="warningToastIcon"
+        personality="
+        system_icon_destructive__warning
+        system_size__toast_icon
+    " />
+</drawables>
