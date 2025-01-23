@@ -16,9 +16,9 @@ class MyProgressDelegate extends GenericInputDelegate {
         if (mIssuedCommand == :open) {
             new ApiCall(method(:onFinished)).sendCommand(mDeviceId, "control", "open");
         } else if (mIssuedCommand == :close) {
-            new ApiCall(method(:onFinished)).sendCommand(mDeviceId, "control", "stop");
-        } else {
             new ApiCall(method(:onFinished)).sendCommand(mDeviceId, "control", "close");
+        } else {
+            new ApiCall(method(:onFinished)).sendCommand(mDeviceId, "control", "stop");
         }
     }
 
