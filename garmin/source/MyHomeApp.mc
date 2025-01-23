@@ -27,6 +27,11 @@ class PageLoopFactory extends WatchUi.ViewLoopFactory {
             return [ view, new TripleSwitchPageViewDelegate(view.weak()) ];
         }
 
+        if (device["category"].equals("light-switch") || device["category"].equals("switch")) {
+            var view = new SingleSwitchPageView(device);
+            return [ view, new SingleSwitchPageViewDelegate(view.weak()) ];
+        }
+
 
         var view = new UnsupportedDevicePageView(device);
         return [ view, new GenericInputDelegate() ];
