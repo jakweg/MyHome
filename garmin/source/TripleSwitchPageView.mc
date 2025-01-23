@@ -42,11 +42,11 @@ class MyProgressDelegateTripleSwitch extends WatchUi.BehaviorDelegate {
     }
 }
 
-class TripleSwitchPageViewDelegate extends WatchUi.BehaviorDelegate {
+class TripleSwitchPageViewDelegate extends GenericInputDelegate {
     hidden var mView;
 
     function initialize(view) {
-        BehaviorDelegate.initialize();
+        GenericInputDelegate.initialize();
         mView = view;
     }
 

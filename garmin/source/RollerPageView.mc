@@ -3,11 +3,11 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 import Toybox.System;
 
-class MyProgressDelegate extends WatchUi.BehaviorDelegate {
+class MyProgressDelegate extends GenericInputDelegate {
     hidden var mIssuedCommand;
     hidden var mDeviceId;
     function initialize(deviceId, issuedCommand) {
-        BehaviorDelegate.initialize();
+        GenericInputDelegate.initialize();
         mIssuedCommand = issuedCommand;
         mDeviceId = deviceId;
     }
