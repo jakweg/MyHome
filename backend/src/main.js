@@ -48,5 +48,5 @@ app.get('/device/:deviceId/status', wrapWithHandler(async (req, res) => {
 app.post('/device/:deviceId/command/:code/:action', wrapWithHandler(async (req, res) => {
     await sendCommandToDevice(req.params.deviceId, req.params.code, req.params.action)
 
-    res.sendStatus(204)
+    res.end(JSON.stringify({ok: "yes"}))
 }))
