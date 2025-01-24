@@ -3,7 +3,7 @@ import Toybox.Lang;
 import Toybox.WatchUi;
 
 class PageLoopFactory extends WatchUi.ViewLoopFactory {
-    hidden var mDevicesList;
+    hidden var mDevicesList as Array;
 
     function initialize(devicesList) {
         ViewLoopFactory.initialize();
@@ -15,12 +15,12 @@ class PageLoopFactory extends WatchUi.ViewLoopFactory {
     }
 
     function getView(page as Lang.Number) as [ WatchUi.View ] or [ WatchUi.View, WatchUi.BehaviorDelegate ] {
-        var device = mDevicesList[page];
+        var device = mDevicesList[page] as Dictionary;
         var category = device["category"];
         
         if (category.equals("curtain")) {
-            var view = new RollerPageView(device);
-            return [ view, new RollerPageViewDelegate(view.weak()) ];
+            var view = new CoverPageView(device);
+            return [ view, new CoverPageViewDelegate(view.weak()) ];
         } 
 
         if (category.equals("triple-switch")) {
@@ -46,7 +46,7 @@ class PageLoopFactory extends WatchUi.ViewLoopFactory {
 
 class MyHomeApp extends Application.AppBase {
 
-    var rollerState;
+    var coverState;
 
     function initialize() {
         AppBase.initialize();
@@ -60,7 +60,7 @@ class MyHomeApp extends Application.AppBase {
     }
 
     function getInitialView() as [Views] or [Views, InputDelegates] {
-        var devices = Application.Storage.getValue("devices-list");
+        var devices = Application.Storage.getValue("devices-list") as Array?;
         if (devices == null || devices.size() == 0) {
             var delegate = new SyncDevicesDelegate();
             delegate.start();
@@ -74,7 +74,7 @@ class MyHomeApp extends Application.AppBase {
 
         var filteredDevices = [];
         for (var i = 0; i < devices.size(); ++i) {
-            var device = devices[i] as Dictionary<String, String>;
+            var device = devices[i] as Dictionary?;
             if (hiddenIds.indexOf(device["id"]) == -1) {
                 filteredDevices.add(device);
             }

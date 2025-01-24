@@ -37,12 +37,12 @@ function openSelectVisibleDevicesView() {
     if (hiddenIds == null) {
         hiddenIds = [];
     }
-    var devices = Toybox.Application.Storage.getValue("devices-list");
+    var devices = Toybox.Application.Storage.getValue("devices-list") as Array<Dictionary>;
     if (devices == null) {
         devices = [];
     }
     for (var i = 0; i < devices.size(); ++i) {
-        var device = devices[i];
+        var device = devices[i] as Dictionary;
         menu.addItem(
             new ToggleMenuItem(
                 device["name"],

@@ -59,7 +59,7 @@ class TripleSwitchPageViewDelegate extends GenericInputDelegate {
 
 class TripleSwitchPageView extends WatchUi.View {
 
-    hidden var mDevice;
+    hidden var mDevice as Dictionary;
 
     function initialize(device) {
         View.initialize();

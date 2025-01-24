@@ -55,11 +55,11 @@ class MyActionMenuDelegate extends WatchUi.ActionMenuDelegate {
 }
 
 
-class RollerPageViewDelegate extends GenericInputDelegate {
+class CoverPageViewDelegate extends GenericInputDelegate {
     hidden var mView;
 
     function initialize(view) {
-        BehaviorDelegate.initialize();
+        GenericInputDelegate.initialize();
         mView = view;
     }
 
@@ -70,9 +70,9 @@ class RollerPageViewDelegate extends GenericInputDelegate {
 
 }
 
-class RollerPageView extends WatchUi.View {
+class CoverPageView extends WatchUi.View {
 
-    hidden var mDevice;
+    hidden var mDevice as Dictionary;
 
     function initialize(device) {
         View.initialize();
@@ -80,7 +80,7 @@ class RollerPageView extends WatchUi.View {
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.RollerLayout(dc));
+        setLayout(Rez.Layouts.CoverLayout(dc));
         (findDrawableById("deviceName") as Text).setText(mDevice["name"]);
     }
 
