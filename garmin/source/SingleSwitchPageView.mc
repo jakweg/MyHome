@@ -42,16 +42,31 @@ class SingleSwitchPageViewDelegate extends GenericInputDelegate {
         mView = view;
     }
 
-    function onSelect() as Boolean {
-        mView.get().onSelect();
-        return true;
+    function onKey(keyEvent as WatchUi.KeyEvent) as Lang.Boolean {
+        if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
+            mView.get().onSelect();
+            return true;
+        }
+        return false;
     }
 
+    function onTap(clickEvent) {
+        var id = getIdOfClickedDrawable(clickEvent, mView.get().mDrawables.get() as Array);
+        if ("on".equals(id)) {
+            mView.get().onActionSelected(:switchOn);
+            return true;
+        } else if ("off".equals(id)) {
+            mView.get().onActionSelected(:switchOff);
+            return true;
+        }
+        return false;
+    }
 }
 
 class SingleSwitchPageView extends WatchUi.View {
 
     hidden var mDevice as Dictionary;
+    var mDrawables;
 
     function initialize(device) {
         View.initialize();
@@ -59,7 +74,9 @@ class SingleSwitchPageView extends WatchUi.View {
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.SingleLightLayout(dc));
+        var drawables = Rez.Layouts.SingleLightLayout(dc);
+        mDrawables = drawables.weak();
+        setLayout(drawables);
         (findDrawableById("deviceName") as Text).setText(mDevice["name"]);
     }
 
