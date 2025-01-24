@@ -27,9 +27,9 @@ class MyProgressDelegateLight extends WatchUi.BehaviorDelegate {
     function onFinished(ok, data) {
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
         if (ok) {
-            WatchUi.showToast("Wykonano", {:icon=>Rez.Drawables.positiveToastIcon});
+            WatchUi.showToast(Rez.Strings.ActionExecutedSuccessfully, {:icon=>Rez.Drawables.positiveToastIcon});
         } else {
-            WatchUi.showToast("Nie udało się :(", {:icon=>Rez.Drawables.warningToastIcon});
+            WatchUi.showToast(Rez.Strings.ActionFailure, {:icon=>Rez.Drawables.warningToastIcon});
         }
     }
 }
@@ -69,8 +69,8 @@ class LightPageView extends WatchUi.View {
 
     function onSelect() {
         var menu = new WatchUi.ActionMenu(null);
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Włącz lampę" }, :switchOn));
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Wyłącz lampę" }, :switchOff));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.SwitchAction_LampOn }, :switchOn));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.SwitchAction_LampOff }, :switchOff));
 
         WatchUi.showActionMenu(
             menu,
@@ -81,14 +81,14 @@ class LightPageView extends WatchUi.View {
     function onActionSelected(actionId) as Void {
         var label;
         if (actionId == :switchOn) {
-            label = "Włączanie";
+            label = Rez.Strings.TurningOn;
         } else if (actionId == :switchOff) {
-            label = "Wyłączanie";
+            label = Rez.Strings.TurningOff;
         } else {
             return;
         }
 
-        var progressBar = new WatchUi.ProgressBar(label, null);
+        var progressBar = new WatchUi.ProgressBar(loadResource(label), null);
         var delegate = new MyProgressDelegateLight(mDevice["id"], actionId);
         WatchUi.pushView(
             progressBar,

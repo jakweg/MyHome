@@ -30,11 +30,11 @@ class MyProgressDelegate extends GenericInputDelegate {
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
 
         if (mIssuedCommand == :stop && ok) {
-            WatchUi.showToast("Zatrzymano", {:icon=>Rez.Drawables.positiveToastIcon});
+            WatchUi.showToast(Rez.Strings.ActionExecutedStopping, {:icon=>Rez.Drawables.positiveToastIcon});
         } else if (ok) {
-            WatchUi.showToast(mIssuedCommand == :open ? "Otwieranie" : "Zamykanie", {:icon=>Rez.Drawables.positiveToastIcon});
+            WatchUi.showToast(mIssuedCommand == :open ? Rez.Strings.ActionExecutedOpening : Rez.Strings.ActionExecutedClosing, {:icon=>Rez.Drawables.positiveToastIcon});
         } else {
-            WatchUi.showToast("Nie udało się :(", {:icon=>Rez.Drawables.warningToastIcon});
+            WatchUi.showToast(Rez.Strings.ActionFailure, {:icon=>Rez.Drawables.warningToastIcon});
         }
     }
 }
@@ -90,9 +90,9 @@ class CoverPageView extends WatchUi.View {
 
     function onSelect() {
         var menu = new WatchUi.ActionMenu(null);
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Otwórz" }, :open));
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Zamknij" }, :close));
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Zatrzymaj" }, :stop));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.CoverAction_Open }, :open));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.CoverAction_Close }, :close));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.CoverAction_Stop }, :stop));
 
         WatchUi.showActionMenu(
             menu,
@@ -112,14 +112,14 @@ class CoverPageView extends WatchUi.View {
             return;
         }
 
-        var label = "Zatrzymywanie";
+        var label = Rez.Strings.ActionExecutedStopping;
         if (action == :open) {
-            label = "Otwieranie";
+            label = Rez.Strings.ActionExecutedOpening;
         } else if (action == :close) {
-            label = "Zamykanie";
+            label = Rez.Strings.ActionExecutedClosing;
         }
 
-        var progressBar = new WatchUi.ProgressBar(label, null);
+        var progressBar = new WatchUi.ProgressBar(loadResource(label), null);
         var delegate = new MyProgressDelegate(mDevice["id"], action);
         WatchUi.pushView(
             progressBar,

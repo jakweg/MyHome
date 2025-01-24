@@ -31,10 +31,10 @@ class GenericInputDelegate extends WatchUi.BehaviorDelegate {
     }
 
     function onMenu() {
-        var menu = new WatchUi.Menu2({:title=>"Opcje"});
+        var menu = new WatchUi.Menu2({:title=>Rez.Strings.OptionsListTitle});
         menu.addItem(
             new MenuItem(
-                "Synchronizuj urządzenia",
+                Rez.Strings.OptionsList_SyncDevices,
                 null,
                 :syncDevices,
                 {}
@@ -42,7 +42,7 @@ class GenericInputDelegate extends WatchUi.BehaviorDelegate {
         );
         menu.addItem(
             new MenuItem(
-                "Ukryj urządzenia",
+                Rez.Strings.OptionsList_HideDevices,
                 null,
                 :hideDevices,
                 {}

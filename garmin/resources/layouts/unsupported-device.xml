@@ -6,7 +6,7 @@
         color="Gfx.COLOR_LT_GRAY" />
 
     <text-area
-        text="To urządzenie nie jest wspierane"
+        text="@Strings.UnsupportedDeviceTypeNotice"
         x="10%" y="65%" width="80%" height="50%"
         font="Gfx.FONT_SYSTEM_XTINY"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
