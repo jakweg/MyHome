@@ -1,7 +1,7 @@
 <layout id="CoverLayout">
-    <bitmap id="cover_bitmap" x="center" y="12%" filename="../drawables/windows.png" />
+    <bitmap id="cover_bitmap" x="center" y="10%" filename="../drawables/windows.png" />
 
-    <label id="deviceName" x="50%" y="50%" font="Gfx.FONT_MEDIUM"
+    <label id="deviceName" x="50%" y="45%" font="Gfx.FONT_MEDIUM"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         color="Gfx.COLOR_LT_GRAY" />
 

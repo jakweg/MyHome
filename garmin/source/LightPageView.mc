@@ -6,10 +6,12 @@ import Toybox.System;
 class MyProgressDelegateLight extends WatchUi.BehaviorDelegate {
     hidden var mIssuedCommand;
     hidden var mDeviceId;
-    function initialize(deviceId, issuedCommand) {
+    hidden var mHideProgressView;
+    function initialize(deviceId, issuedCommand, hideProgressView) {
         BehaviorDelegate.initialize();
         mIssuedCommand = issuedCommand;
         mDeviceId = deviceId;
+        mHideProgressView = hideProgressView;
     }
 
     function start() {
@@ -25,10 +27,10 @@ class MyProgressDelegateLight extends WatchUi.BehaviorDelegate {
     }
 
     function onFinished(ok, data) {
-        WatchUi.popView(WatchUi.SLIDE_RIGHT);
-        if (ok) {
-            WatchUi.showToast(Rez.Strings.ActionExecutedSuccessfully, {:icon=>Rez.Drawables.positiveToastIcon});
-        } else {
+        if (mHideProgressView) {
+            WatchUi.popView(WatchUi.SLIDE_RIGHT);
+        }
+        if (!ok) {
             WatchUi.showToast(Rez.Strings.ActionFailure, {:icon=>Rez.Drawables.warningToastIcon});
         }
     }
@@ -42,16 +44,49 @@ class LightPageViewDelegate extends GenericInputDelegate {
         mView = view;
     }
 
-    function onSelect() as Boolean {
-        mView.get().onSelect();
-        return true;
+    function onKey(keyEvent as WatchUi.KeyEvent) as Lang.Boolean {
+        if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
+            mView.get().onSelect();
+            return true;
+        }
+        return false;
     }
 
+    function onTap(clickEvent) {
+        var drawables = mView.get().mDrawables.get() as Array;
+        var coords = clickEvent.getCoordinates();
+        var x = coords[0];
+        var y = coords[1];
+        for( var i = 0; i < drawables.size(); i++ ) {
+            var drawable = drawables[i];
+            if (drawable instanceof WatchUi.TextArea) {
+                if (x >= drawable.locX && x <= drawable.locX + drawable.width
+                    && y >= drawable.locY && y <= drawable.locY + drawable.height) {
+                        if ("on".equals(drawable.identifier)) {
+                            action_turnOn();
+                            return true;
+                        } else if ("off".equals(drawable.identifier)) {
+                            action_turnOff();
+                            return true;
+                        }
+                    }
+            }
+        }
+        return false;
+    }
+
+    function action_turnOn() {
+        mView.get().onActionSelected2(:switchOn, false);
+    }
+    function action_turnOff() {
+        mView.get().onActionSelected2(:switchOff, false);
+    }
 }
 
 class LightPageView extends WatchUi.View {
 
     hidden var mDevice as Dictionary;
+    var mDrawables;
 
     function initialize(device) {
         View.initialize();
@@ -59,7 +94,20 @@ class LightPageView extends WatchUi.View {
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.TripleLightLayout(dc));
+        var drawables = Rez.Layouts.SingleLightLayout(dc);
+        mDrawables = drawables.weak();
+        var buttonId = 0;
+        for( var i = 0; i < drawables.size(); i++ ) {
+            var drawable = drawables[i];
+            if (drawable instanceof WatchUi.Button) {
+                buttonId++;
+                drawable.identifier = "" + buttonId;
+                drawable.behavior = :onSelect;
+                drawable.setState(:stateDisabled);
+                drawable.setState(:stateDefault);
+            }
+        }
+        setLayout(drawables);
         (findDrawableById("deviceName") as Text).setText(mDevice["name"]);
     }
 
@@ -78,7 +126,15 @@ class LightPageView extends WatchUi.View {
         );
     }
 
+    function onShow() {
+        System.println("XD");
+    }
+
     function onActionSelected(actionId) as Void {
+        onActionSelected2(actionId, true);
+    }
+
+    function onActionSelected2(actionId, showProgressView) as Void {
         var label;
         if (actionId == :switchOn) {
             label = Rez.Strings.TurningOn;
@@ -89,12 +145,14 @@ class LightPageView extends WatchUi.View {
         }
 
         var progressBar = new WatchUi.ProgressBar(loadResource(label), null);
-        var delegate = new MyProgressDelegateLight(mDevice["id"], actionId);
-        WatchUi.pushView(
-            progressBar,
-            delegate,
-            WatchUi.SLIDE_LEFT
-        );
+        var delegate = new MyProgressDelegateLight(mDevice["id"], actionId, showProgressView);
+        if (showProgressView) {
+            WatchUi.pushView(
+                progressBar,
+                delegate,
+                WatchUi.SLIDE_LEFT
+            );
+        }
 
         delegate.start();
     }

@@ -59,7 +59,7 @@ class SingleSwitchPageView extends WatchUi.View {
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.TripleLightLayout(dc));
+        setLayout(Rez.Layouts.SingleLightLayout(dc));
         (findDrawableById("deviceName") as Text).setText(mDevice["name"]);
     }
 
