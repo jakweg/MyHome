@@ -82,6 +82,6 @@ class ActionButton {
     }
 
     function isPointWithin(x, y) as Boolean {
-        return x >= mX && x <= mX + mWidth && y >= mY && mY <= mY + mHeight;
+        return x >= mX && x <= mX + mWidth && y >= mY && y <= mY + mHeight;
     }
 }

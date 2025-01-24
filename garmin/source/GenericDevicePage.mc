@@ -3,6 +3,21 @@ import Toybox.WatchUi;
 import Toybox.Lang;
 import Toybox.System;
 
+class MyActionMenuDelegate extends WatchUi.ActionMenuDelegate {
+    hidden var mOnActionSelected;
+    function initialize(onActionSelected) {
+        ActionMenuDelegate.initialize();
+        mOnActionSelected = onActionSelected;
+    }
+
+    function onBack() as Void { 
+    }
+
+    function onSelect(item as WatchUi.ActionMenuItem) as Void {
+        mOnActionSelected.invoke(item.getId());
+    }
+}
+
 class GenericDeviceDelegate extends GenericInputDelegate {
     hidden var mView as WeakReference<GenericDevicePage>;
 
