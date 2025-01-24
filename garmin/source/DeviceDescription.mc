@@ -15,34 +15,34 @@ function getGenericDeviceDescription(device as Dictionary) as DeviceDescription?
 
     if ("light-switch".equals(category)) {
         return new DeviceDescription([
-            new ActionSpecification("A", :switchLedOn, Rez.Strings.SwitchAction_LampOn, [:switchLedOff]),
-            new ActionSpecification("B", :switchLedOff, Rez.Strings.SwitchAction_LampOff, [:switchLedOn])
+            new ActionSpecification("😎", :switchLedOn, Rez.Strings.SwitchAction_LampOn, [:switchLedOff]),
+            new ActionSpecification("😴", :switchLedOff, Rez.Strings.SwitchAction_LampOff, [:switchLedOn])
         ]);
     }
 
     if ("switch".equals(category)) {
         return new DeviceDescription([
-            new ActionSpecification("A", :switchOn, Rez.Strings.SwitchAction_On, [:switchOff]),
-            new ActionSpecification("B", :switchOff, Rez.Strings.SwitchAction_Off, [:switchOn])
+            new ActionSpecification("✅", :switchOn, Rez.Strings.SwitchAction_On, [:switchOff]),
+            new ActionSpecification("❌", :switchOff, Rez.Strings.SwitchAction_Off, [:switchOn])
         ]);
     }
 
     if ("triple-switch".equals(category)) {
         return new DeviceDescription([
-            new ActionSpecification("D", :switchOff2, Rez.Strings.TripleSwitchAction_Off2, [:switchOn2]),
-            new ActionSpecification("F", :switchOff3, Rez.Strings.TripleSwitchAction_Off3, [:switchOn3]),
-            new ActionSpecification("B", :switchOff1, Rez.Strings.TripleSwitchAction_Off1, [:switchOn1]),
-            new ActionSpecification("A", :switchOn1, Rez.Strings.TripleSwitchAction_On1, [:switchOff1]),
-            new ActionSpecification("C", :switchOn2, Rez.Strings.TripleSwitchAction_On2, [:switchOff2]),
-            new ActionSpecification("E", :switchOn3, Rez.Strings.TripleSwitchAction_On3, [:switchOff3]),
+            new ActionSpecification("⚡", :switchOn1, Rez.Strings.TripleSwitchAction_On1, [:switchOff1]),
+            new ActionSpecification("⚡", :switchOn2, Rez.Strings.TripleSwitchAction_On2, [:switchOff2]),
+            new ActionSpecification("⚡", :switchOn3, Rez.Strings.TripleSwitchAction_On3, [:switchOff3]),
+            new ActionSpecification("🔌", :switchOff1, Rez.Strings.TripleSwitchAction_Off1, [:switchOn1]),
+            new ActionSpecification("🔌", :switchOff2, Rez.Strings.TripleSwitchAction_Off2, [:switchOn2]),
+            new ActionSpecification("🔌", :switchOff3, Rez.Strings.TripleSwitchAction_Off3, [:switchOn3]),
         ]);
     }
 
     if ("curtain".equals(category)) {
         return new DeviceDescription([
-            new ActionSpecification("A", :open,  Rez.Strings.CoverAction_Open, [:stop, :close]),
-            new ActionSpecification("B", :stop,  Rez.Strings.CoverAction_Stop, [:open, :close]),
-            new ActionSpecification("C", :close, Rez.Strings.CoverAction_Close, [:stop, :open]),
+            new ActionSpecification("⬆️", :open,  Rez.Strings.CoverAction_Open, [:stop, :close]),
+            new ActionSpecification("⏹️", :stop,  Rez.Strings.CoverAction_Stop, [:open, :close]),
+            new ActionSpecification("⬇️", :close, Rez.Strings.CoverAction_Close, [:stop, :open]),
         ]);
     }
 
