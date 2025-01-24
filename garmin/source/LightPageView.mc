@@ -53,33 +53,15 @@ class LightPageViewDelegate extends GenericInputDelegate {
     }
 
     function onTap(clickEvent) {
-        var drawables = mView.get().mDrawables.get() as Array;
-        var coords = clickEvent.getCoordinates();
-        var x = coords[0];
-        var y = coords[1];
-        for( var i = 0; i < drawables.size(); i++ ) {
-            var drawable = drawables[i];
-            if (drawable instanceof WatchUi.TextArea) {
-                if (x >= drawable.locX && x <= drawable.locX + drawable.width
-                    && y >= drawable.locY && y <= drawable.locY + drawable.height) {
-                        if ("on".equals(drawable.identifier)) {
-                            action_turnOn();
-                            return true;
-                        } else if ("off".equals(drawable.identifier)) {
-                            action_turnOff();
-                            return true;
-                        }
-                    }
-            }
+        var id = getIdOfClickedDrawable(clickEvent, mView.get().mDrawables.get() as Array);
+        if ("on".equals(id)) {
+            mView.get().onActionSelected2(:switchOn, false);
+            return true;
+        } else if ("off".equals(id)) {
+            mView.get().onActionSelected2(:switchOff, false);
+            return true;
         }
         return false;
-    }
-
-    function action_turnOn() {
-        mView.get().onActionSelected2(:switchOn, false);
-    }
-    function action_turnOff() {
-        mView.get().onActionSelected2(:switchOff, false);
     }
 }
 
@@ -96,17 +78,6 @@ class LightPageView extends WatchUi.View {
     function onLayout(dc as Dc) as Void {
         var drawables = Rez.Layouts.SingleLightLayout(dc);
         mDrawables = drawables.weak();
-        var buttonId = 0;
-        for( var i = 0; i < drawables.size(); i++ ) {
-            var drawable = drawables[i];
-            if (drawable instanceof WatchUi.Button) {
-                buttonId++;
-                drawable.identifier = "" + buttonId;
-                drawable.behavior = :onSelect;
-                drawable.setState(:stateDisabled);
-                drawable.setState(:stateDefault);
-            }
-        }
         setLayout(drawables);
         (findDrawableById("deviceName") as Text).setText(mDevice["name"]);
     }
@@ -124,10 +95,6 @@ class LightPageView extends WatchUi.View {
             menu,
             new MyActionMenuDelegate(method(:onActionSelected))
         );
-    }
-
-    function onShow() {
-        System.println("XD");
     }
 
     function onActionSelected(actionId) as Void {

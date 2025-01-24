@@ -63,16 +63,34 @@ class CoverPageViewDelegate extends GenericInputDelegate {
         mView = view;
     }
 
-    function onSelect() as Boolean {
-        mView.get().onSelect();
-        return true;
+    function onKey(keyEvent as WatchUi.KeyEvent) as Lang.Boolean {
+        if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
+            mView.get().onSelect();
+            return true;
+        }
+        return false;
     }
 
+    function onTap(clickEvent) {
+        var id = getIdOfClickedDrawable(clickEvent, mView.get().mDrawables.get() as Array);
+        if ("open".equals(id)) {
+            mView.get().onActionSelected(:open);
+            return true;
+        } else if ("close".equals(id)) {
+            mView.get().onActionSelected(:close);
+            return true;
+        } else if ("stop".equals(id)) {
+            mView.get().onActionSelected(:stop);
+            return true;
+        }
+        return false;
+    }
 }
 
 class CoverPageView extends WatchUi.View {
 
     hidden var mDevice as Dictionary;
+    var mDrawables;
 
     function initialize(device) {
         View.initialize();
@@ -80,7 +98,9 @@ class CoverPageView extends WatchUi.View {
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.CoverLayout(dc));
+        var drawables = Rez.Layouts.CoverLayout(dc);
+        mDrawables = drawables.weak();
+        setLayout(drawables);
         (findDrawableById("deviceName") as Text).setText(mDevice["name"]);
     }
 

@@ -50,16 +50,43 @@ class TripleSwitchPageViewDelegate extends GenericInputDelegate {
         mView = view;
     }
 
-    function onSelect() as Boolean {
-        mView.get().onSelect();
-        return true;
+    function onKey(keyEvent as WatchUi.KeyEvent) as Lang.Boolean {
+        if (keyEvent.getKey() == WatchUi.KEY_ENTER) {
+            mView.get().onSelect();
+            return true;
+        }
+        return false;
     }
 
+    function onTap(clickEvent) {
+        var id = getIdOfClickedDrawable(clickEvent, mView.get().mDrawables.get() as Array);
+        if ("on1".equals(id)) {
+            mView.get().onActionSelected(:switchOn1);
+            return true;
+        } else if ("on2".equals(id)) {
+            mView.get().onActionSelected(:switchOn2);
+            return true;
+        } else if ("on3".equals(id)) {
+            mView.get().onActionSelected(:switchOn3);
+            return true;
+        } else if ("off1".equals(id)) {
+            mView.get().onActionSelected(:switchOff1);
+            return true;
+        } else if ("off2".equals(id)) {
+            mView.get().onActionSelected(:switchOff2);
+            return true;
+        } else if ("off3".equals(id)) {
+            mView.get().onActionSelected(:switchOff3);
+            return true;
+        }
+        return false;
+    }
 }
 
 class TripleSwitchPageView extends WatchUi.View {
 
     hidden var mDevice as Dictionary;
+    var mDrawables;
 
     function initialize(device) {
         View.initialize();
@@ -67,7 +94,9 @@ class TripleSwitchPageView extends WatchUi.View {
     }
 
     function onLayout(dc as Dc) as Void {
-        setLayout(Rez.Layouts.TripleLightLayout(dc));
+        var drawables = Rez.Layouts.TripleLightLayout(dc);
+        mDrawables = drawables.weak();
+        setLayout(drawables);
         (findDrawableById("deviceName") as Text).setText(mDevice["name"]);
     }
 
