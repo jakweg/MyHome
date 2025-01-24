@@ -4,7 +4,7 @@ import Toybox.Lang;
 import Toybox.System;
 
 class UnsupportedDevicePageView extends WatchUi.View {
-    hidden var mDevice;
+    hidden var mDevice as Dictionary;
 
     function initialize(device) {
         View.initialize();

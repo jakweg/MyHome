@@ -51,7 +51,7 @@ class SingleSwitchPageViewDelegate extends GenericInputDelegate {
 
 class SingleSwitchPageView extends WatchUi.View {
 
-    hidden var mDevice;
+    hidden var mDevice as Dictionary;
 
     function initialize(device) {
         View.initialize();

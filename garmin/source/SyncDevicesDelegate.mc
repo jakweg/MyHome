@@ -24,7 +24,7 @@ class SyncDevicesDelegate extends WatchUi.InputDelegate {
         new ApiCall(method(:mDevicesDownloaded)).getDevices();
     }
 
-    function mDevicesDownloaded(ok, data) as Void {
+    function mDevicesDownloaded(ok, data as Dictionary) as Void {
         if (!ok) {
             WatchUi.showToast("Niepowodzenie", {:icon=>Rez.Drawables.warningToastIcon});
             WatchUi.popView(WatchUi.SLIDE_BLINK);
