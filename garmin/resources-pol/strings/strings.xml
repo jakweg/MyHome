@@ -1,3 +1,31 @@
 <strings>
     <string id="AppName">Dom</string>
+    <string id="SwitchAction_On">Włącz</string>
+    <string id="SwitchAction_Off">Wyłącz</string>
+    <string id="SwitchAction_LampOn">Włącz lampę</string>
+    <string id="SwitchAction_LampOff">Wyłącz lampę</string>
+    <string id="TripleSwitchAction_On1">Włącz pierwszą lampę</string>
+    <string id="TripleSwitchAction_Off1">Wyłącz pierwszą lampę</string>
+    <string id="TripleSwitchAction_On2">Włącz drugą lampę</string>
+    <string id="TripleSwitchAction_Off2">Wyłącz drugą lampę</string>
+    <string id="TripleSwitchAction_On3">Włącz trzecią lampę</string>
+    <string id="TripleSwitchAction_Off3">Wyłącz trzecią lampę</string>
+    <string id="CoverAction_Open">Otwórz</string>
+    <string id="CoverAction_Close">Zamknij</string>
+    <string id="CoverAction_Stop">Zatrzymaj</string>
+    <string id="TurningOn">Włączanie</string>
+    <string id="TurningOff">Wyłączanie</string>
+    <string id="ActionExecutedSuccessfully">Gotowe</string>
+    <string id="ActionFailure">Nie udało się</string>
+    <string id="ActionExecutedOpening">Otwieranie</string>
+    <string id="ActionExecutedClosing">Zamykanie</string>
+    <string id="ActionExecutedStopping">Zatrzymywanie</string>
+    <string id="VisibleDevicesListTitle">Widoczne urządzenia</string>
+    <string id="OptionsListTitle">Opcje</string>
+    <string id="OptionsList_SyncDevices">Synchronizuj urządzenia</string>
+    <string id="OptionsList_HideDevices">Ukryj urządzenia</string>
+    <string id="SyncSuccess">Synchronizacja zakończona</string>
+    <string id="SyncFailure">Synchronizacja nie powiodła się</string>
+    <string id="SyncInProgress">Synchronizowanie urządzeń</string>
+    <string id="UnsupportedDeviceTypeNotice">Ten typ urządzenia nie jest obsługiwany</string>
 </strings>
