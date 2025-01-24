@@ -42,8 +42,8 @@ class MyProgressDelegate extends GenericInputDelegate {
 class MyActionMenuDelegate extends WatchUi.ActionMenuDelegate {
     hidden var mOnActionSelected;
     function initialize(onActionSelected) {
-        mOnActionSelected = onActionSelected;
         ActionMenuDelegate.initialize();
+        mOnActionSelected = onActionSelected;
     }
 
     function onBack() as Void { 

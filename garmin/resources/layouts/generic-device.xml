@@ -1,0 +1,17 @@
+<layout id="GenericDeviceLayout">
+    <bitmap id="light_bitmap" x="center" y="3%" filename="../drawables/idea-bulb.png" />
+
+    <label id="deviceName" x="50%" y="33%" font="Gfx.FONT_MEDIUM"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        color="Gfx.COLOR_LT_GRAY" />
+
+    <bitmap id="rightTop"
+        personality="
+            system_icon_light__hint_button_right_top
+            system_loc__hint_button_right_top" />
+
+    <bitmap id="actionMenu"
+        personality="
+            system_icon_dark__hint_action_menu
+            system_loc__hint_action_menu" />
+</layout>
