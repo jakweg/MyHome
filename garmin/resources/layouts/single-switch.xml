@@ -1,10 +1,24 @@
-<layout id="TripleLightLayout">
+<layout id="SingleLightLayout">
     <bitmap id="light_bitmap" x="center" y="10%" filename="../drawables/idea-bulb.png" />
 
     <label id="deviceName" x="50%" y="45%" font="Gfx.FONT_MEDIUM"
         justification="Graphics.TEXT_JUSTIFY_CENTER"
         color="Gfx.COLOR_LT_GRAY" />
 
+
+    <text-area
+        id="off"
+        x="15%" y="65%" width="30%" height="30%"
+        font="Graphics.FONT_LARGE"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="🌙" />
+
+    <text-area
+        id="on"
+        x="55%" y="65%" width="30%" height="30%"
+        font="Graphics.FONT_LARGE"
+        justification="Graphics.TEXT_JUSTIFY_CENTER"
+        text="🌞" />
 
     <bitmap id="rightTop"
         personality="

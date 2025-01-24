@@ -83,9 +83,9 @@ class MyHomeApp extends Application.AppBase {
             filteredDevices = devices;
         }
 
-        var loop = new WatchUi.ViewLoop(new PageLoopFactory(filteredDevices),
-        {:wrap => true});
-
+        var factory = new PageLoopFactory(filteredDevices);
+        var loop = new WatchUi.ViewLoop(factory, {:wrap => true});
+    
         return [loop, new WatchUi.ViewLoopDelegate(loop)];
     }
 
