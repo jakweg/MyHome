@@ -1,3 +1,31 @@
 <strings>
-    <string id="AppName">Mój dom</string>
+    <string id="AppName">Home</string>
+    <string id="SwitchAction_On">Turn on</string>
+    <string id="SwitchAction_Off">Turn off</string>
+    <string id="SwitchAction_LampOn">Turn the lamp on</string>
+    <string id="SwitchAction_LampOff">Turn the lamp off</string>
+    <string id="TripleSwitchAction_On1">Turn on the first lamp</string>
+    <string id="TripleSwitchAction_Off1">Turn off the first lamp</string>
+    <string id="TripleSwitchAction_On2">Turn on the second lamp</string>
+    <string id="TripleSwitchAction_Off2">Turn off the second lamp</string>
+    <string id="TripleSwitchAction_On3">Turn on the third lamp</string>
+    <string id="TripleSwitchAction_Off3">Turn off the third lamp</string>
+    <string id="CoverAction_Open">Open</string>
+    <string id="CoverAction_Close">Close</string>
+    <string id="CoverAction_Stop">Stop</string>
+    <string id="TurningOn">Turning on</string>
+    <string id="TurningOff">Turning off</string>
+    <string id="ActionExecutedSuccessfully">Done</string>
+    <string id="ActionFailure">Failed to do so</string>
+    <string id="ActionExecutedOpening">Opening</string>
+    <string id="ActionExecutedClosing">Closing</string>
+    <string id="ActionExecutedStopping">Stopping</string>
+    <string id="VisibleDevicesListTitle">Visible devices</string>
+    <string id="OptionsListTitle">Options</string>
+    <string id="OptionsList_SyncDevices">Sync devices</string>
+    <string id="OptionsList_HideDevices">Hide devices</string>
+    <string id="SyncSuccess">Sync done</string>
+    <string id="SyncFailure">Sync failed</string>
+    <string id="SyncInProgress">Syncing devices</string>
+    <string id="UnsupportedDeviceTypeNotice">This device type is unsupported</string>
 </strings>

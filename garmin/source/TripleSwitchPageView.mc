@@ -35,9 +35,9 @@ class MyProgressDelegateTripleSwitch extends WatchUi.BehaviorDelegate {
     function onFinished(ok, data) {
         WatchUi.popView(WatchUi.SLIDE_RIGHT);
         if (ok) {
-            WatchUi.showToast("Wykonano", {:icon=>Rez.Drawables.positiveToastIcon});
+            WatchUi.showToast(Rez.Strings.ActionExecutedSuccessfully, {:icon=>Rez.Drawables.positiveToastIcon});
         } else {
-            WatchUi.showToast("Nie udało się :(", {:icon=>Rez.Drawables.warningToastIcon});
+            WatchUi.showToast(Rez.Strings.ActionFailure, {:icon=>Rez.Drawables.warningToastIcon});
         }
     }
 }
@@ -77,14 +77,14 @@ class TripleSwitchPageView extends WatchUi.View {
 
     function onSelect() {
         var menu = new WatchUi.ActionMenu(null);
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Włącz pierwszą lampę" }, :switchOn1));
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Wyłącz pierwszą lampę" }, :switchOff1));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.TripleSwitchAction_On1 }, :switchOn1));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.TripleSwitchAction_Off1 }, :switchOff1));
 
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Włącz drugą lampę" }, :switchOn2));
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Wyłącz drugą lampę" }, :switchOff2));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.TripleSwitchAction_On2 }, :switchOn2));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.TripleSwitchAction_Off2 }, :switchOff2));
 
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Włącz trzecią lampę" }, :switchOn3));
-        menu.addItem(new WatchUi.ActionMenuItem({ :label => "Wyłącz trzecią lampę" }, :switchOff3));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.TripleSwitchAction_On3 }, :switchOn3));
+        menu.addItem(new WatchUi.ActionMenuItem({ :label => Rez.Strings.TripleSwitchAction_Off3 }, :switchOff3));
 
         WatchUi.showActionMenu(
             menu,
@@ -95,14 +95,14 @@ class TripleSwitchPageView extends WatchUi.View {
     function onActionSelected(actionId) as Void {
         var label;
         if (actionId == :switchOn1 || actionId == :switchOn2 || actionId == :switchOn3) {
-            label = "Włączanie";
+            label = Rez.Strings.TurningOn;
         } else if (actionId == :switchOff1 || actionId == :switchOff2 || actionId == :switchOff3) {
-            label = "Wyłączanie";
+            label = Rez.Strings.TurningOff;
         } else {
             return;
         }
 
-        var progressBar = new WatchUi.ProgressBar(label, null);
+        var progressBar = new WatchUi.ProgressBar(loadResource(label), null);
         var delegate = new MyProgressDelegateTripleSwitch(mDevice["id"], actionId);
         WatchUi.pushView(
             progressBar,

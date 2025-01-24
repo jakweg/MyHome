@@ -32,7 +32,7 @@ class SelectVisibleDevicesViewDelegate extends WatchUi.Menu2InputDelegate {
 }
 
 function openSelectVisibleDevicesView() {
-    var menu = new WatchUi.Menu2({:title=>"Widoczne urządzenia"});
+    var menu = new WatchUi.Menu2({:title=>Rez.Strings.VisibleDevicesListTitle});
     var hiddenIds = Toybox.Application.Storage.getValue("hidden-ids");
     if (hiddenIds == null) {
         hiddenIds = [];

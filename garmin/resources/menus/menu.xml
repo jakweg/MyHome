@@ -1,4 +1,0 @@
-<action-menu id="ActionMenu">
-    <action-menu-item id="edit" label="Edit me" />
-    <action-menu-item id="dismiss" label="Dismiss me" />
-</action-menu>

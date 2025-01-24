@@ -8,7 +8,7 @@ class SyncDevicesDelegate extends WatchUi.InputDelegate {
     function initialize() {
         InputDelegate.initialize();
         mView = new WatchUi.ProgressBar(
-            "Synchronizowania urządzeń",
+            loadResource(Rez.Strings.SyncInProgress),
             null
         );
     }
@@ -26,14 +26,14 @@ class SyncDevicesDelegate extends WatchUi.InputDelegate {
 
     function mDevicesDownloaded(ok, data as Dictionary) as Void {
         if (!ok) {
-            WatchUi.showToast("Niepowodzenie", {:icon=>Rez.Drawables.warningToastIcon});
+            WatchUi.showToast(Rez.Strings.SyncFailure, {:icon=>Rez.Drawables.warningToastIcon});
             WatchUi.popView(WatchUi.SLIDE_BLINK);
             return;
         }
 
         Application.Storage.setValue("devices-list", data["devices"]);
 
-        WatchUi.showToast("Zsynchronizowano", {:icon=>Rez.Drawables.positiveToastIcon});
+        WatchUi.showToast(Rez.Strings.SyncSuccess, {:icon=>Rez.Drawables.positiveToastIcon});
         WatchUi.popView(WatchUi.SLIDE_BLINK);
     }
 }
