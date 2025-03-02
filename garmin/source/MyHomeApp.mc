@@ -19,6 +19,8 @@ class PageLoopFactory extends WatchUi.ViewLoopFactory {
 
         var description = getGenericDeviceDescription(device);
 
+        Toybox.Application.Storage.setValue("last-device-id", device["id"]);
+
         if (description != null) {
             var view = new GenericDevicePage(device, description);
             return [ view, view.getDelegate() ];
@@ -30,8 +32,6 @@ class PageLoopFactory extends WatchUi.ViewLoopFactory {
 }
 
 class MyHomeApp extends Application.AppBase {
-
-    var coverState;
 
     function initialize() {
         AppBase.initialize();
@@ -52,16 +52,23 @@ class MyHomeApp extends Application.AppBase {
             return [delegate.getView(), delegate];
         }
 
+        var lastUsedDeviceId = Toybox.Application.Storage.getValue("last-device-id");
+
         var hiddenIds = Toybox.Application.Storage.getValue("hidden-ids");
         if (hiddenIds == null) {
             hiddenIds = [];
         }
 
         var filteredDevices = [];
+        var pageNumber = 0;
         for (var i = 0; i < devices.size(); ++i) {
             var device = devices[i] as Dictionary?;
-            if (hiddenIds.indexOf(device["id"]) == -1) {
+            var id = device["id"];
+            if (hiddenIds.indexOf(id) == -1) {
                 filteredDevices.add(device);
+                if (id.equals(lastUsedDeviceId)) {
+                    pageNumber = filteredDevices.size() - 1;
+                }
             }
         }
         if (filteredDevices.size() == 0) {
@@ -69,7 +76,10 @@ class MyHomeApp extends Application.AppBase {
         }
 
         var factory = new PageLoopFactory(filteredDevices);
-        var loop = new WatchUi.ViewLoop(factory, {:wrap => true});
+        var loop = new WatchUi.ViewLoop(factory, { 
+            :wrap => true, 
+            :page => pageNumber,
+        });
     
         return [loop, new WatchUi.ViewLoopDelegate(loop)];
     }
